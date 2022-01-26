@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+		<div class="text-right">
+			<a href="/repairtypes/add" class="btn btn-secondary">Add</a>
+      	</div>
+	
+			<h1>Repair types</h1>
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${repairTypes.empty}">
+						<td colspan="2">No repairs available</td>
+					</tr>
+					<tr th:each="repairType : ${repairTypes}">
+						<td><span th:text="${repairType.id}"> </span></td>
+						<td><span th:text="${repairType.name}"> </span></td>
+						<td><a
+							th:href="@{/repairtypes/edit/{id}(id=${repairType.id})}">Edit</a></td>
+						<td><a
+							th:href="@{/repairtypes/delete/{id}(id=${repairType.id})}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

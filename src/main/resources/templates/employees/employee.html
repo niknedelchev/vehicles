@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h3>Pofile: Employee</h3>
+			<br />
+
+			<h4>
+				Name: <span
+					th:text="${employee.firstName} + ' ' + ${employee.lastName}">
+				</span>
+			</h4>
+
+			<br>
+			<h4>
+				Repair shop: <span th:text="${employee.repairShop.name}"> </span>
+			</h4>
+
+		
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

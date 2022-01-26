@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Repairs history</h1>
+			<h2>Repairs at shop<span th:text="${currentRepairShop.name}"></span> by brand</h2>
+			<br />
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Brand</th>
+						<th>Count</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${repairs == null}">
+						<td colspan="2">No repairs available</td>
+					</tr>
+					<tr th:each="item : ${repairs}">
+						<td><span th:text="${item.key}"> </span></td>
+						<td><span th:text="${item.value}"> </span></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>
+\

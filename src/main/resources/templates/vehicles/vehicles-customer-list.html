@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Vehicles list </h1>
+			<h3>Customer : <span th:text="${customer.firstName}"></span> <span th:text="${customer.lastName}"></span></h3>
+			<br>
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Production year</th>
+						<th>Registration plate</th>
+						<th>Brand</th>
+						<th>Brand model</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${vehicles.empty}">
+						<td colspan="2">No vehicles available</td>
+					</tr>
+					<tr th:each="vehicle : ${vehicles}">
+						<td><span th:text="${vehicle.id}"> </span></td>
+						<td><span th:text="${vehicle.productionYear}"> </span></td>
+						<td><span th:text="${vehicle.registrationPlate}"> </span></td>
+						<td><span th:text="${vehicle.brandModel.getBrand.getName}">	</span></td>
+						<td><span th:text="${vehicle.brandModel.getName}"> </span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

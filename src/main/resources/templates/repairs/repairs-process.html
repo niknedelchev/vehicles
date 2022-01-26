@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+
+			<h2>Repair - processing</h2>
+			<h3>Repair id: <span th:text="${repair.id}"></span>	</h3>
+			<h3>Repair shop: <span th:text="${repair.repairShop.name}"></span></h3>
+			<h3>Repair type: <span th:text="${repair.repairType.name}"></span></h3>
+			<br>
+
+			<form action="#" class="w-50" th:action="@{/repairs/process/}" method="POST">
+				<input class="form-control" type="hidden" name="id" th:value="${repair.id}" /> 
+				<label for="Price">Set price</label>
+				<input class="form-control" type="text" id="Price" name="price" />
+				<input type="submit"  class="btn btn-secondary" value="Submit" />
+			</form>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

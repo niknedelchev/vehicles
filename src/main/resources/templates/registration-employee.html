@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<div style="width: 600px; margin-left: auto; margin-right: auto; margin-top: 24px; padding: 24px;">
+				<div class="card">
+					<div class="card-header">
+						<i class="fa fa-user"></i> Register new employee
+					</div>
+					<div class="card-block" style="padding: 24px;">
+						 <form th:action="@{/register/employee}" method="post">
+			                <div class="form-group">
+			                    <label for="FirstName">First Name</label>
+			                    <input type="text" class="form-control" id="FirstName"
+			                           name="firstName">
+			                </div>
+			                <div class="form-group">
+			                    <label for="LastName">Last Name</label>
+			                    <input type="text" class="form-control" id="LastName"
+			                           name="lastName">
+			                </div>
+			                <div class="form-group">
+			                    <label for="Username">Username</label>
+			                    <input type="text" class="form-control" id="Username"
+			                           name="username">
+			                </div>
+			               <div class="form-group">
+			                    <label for="Password">Password</label>
+			                    <input type="password" class="form-control" id="Password" name="password">
+			                </div>
+			                
+	              			<label for="qualificationDropDown">Select qualification</label>
+							<select name="qualification" id="qualificationDropDown" class="form-control">
+								<option th:each="qualification : ${qualifications}"
+									th:value="${qualification.getId}"
+									th:text="${qualification.getName}">
+								</option>
+							</select><br>
+				
+							<label for="repairShopDropDown">Select repair shop</label>
+							<select name="repairShop" id="repairShopDropDown" class="form-control">
+								<option th:each="repairShop : ${repairShops}"
+									th:value="${repairShop.getId}" th:text="${repairShop.getName}">
+								</option>
+							</select>
+							<br>
+	
+			                <div class="form-group">
+			                </div>
+			                <button type="submit" class="btn btn-primary">Submit</button>
+			            </form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

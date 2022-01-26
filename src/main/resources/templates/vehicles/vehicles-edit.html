@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Vehicles - edit</h1>
+
+			<form action="#" class="w-50" th:action="@{/vehicles/edit/{id}(id=${vehicle.id})}"
+				th:object="${vehicle}" method="post">
+				<p>
+					Production year: <input type="text" class="form-control" th:field="*{productionYear}" />
+				</p>
+				<p>
+					Registration plate: <input type="text" class="form-control"
+						th:field="*{registrationPlate}" />
+				</p>
+
+				<label for="brandModelDropDown">Select brand model</label> 
+				<select name="brandModel" id="brandModelDropDown" class="form-control" th:field="*{brandModel}">
+					<option value="">Select brand model</option>
+					<option th:each="brandModel : ${brandModels}"
+						th:value="${brandModel.getId}"
+						th:text="${brandModel.getName + ', ' + brandModel.getBrand.getName}"></option>
+				</select> 
+				
+				<label for="customersDropDown">Select customer</label> 
+				<select name="customer" id="customersDropDown" class="form-control" th:field="*{customer}">
+					<option value="">Select customers</option>
+					<option th:each="customer : ${customers}"
+						th:value="${customer.getId}"
+						th:text="${customer.getFirstName + ' ' + customer.getLastName}"></option>
+				</select>
+				<br>
+				<p>
+					<input type="submit" class="btn btn-secondary" value="Submit" />
+	   				 <input type="reset" class="btn btn-secondary" value="Reset" />
+				</p>
+			</form>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

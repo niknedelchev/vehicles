@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Book a repair</h1>
+
+			<h6>
+				Selected vehicle:
+				<span
+					th:text="${!selectedVehicle.isEmpty()} ? ${selectedVehicle.get().registrationPlate} : 'no selected vehicle'" />
+			</h6>
+
+			<h6>
+				Selected shop:
+				<span
+					th:text="${!selectedShop.isEmpty()} ? ${selectedShop.get().name} : 'no selected shop'" />
+			</h6>
+			<br>
+			<!-- select vehicle -->
+			<form action="" th:action="@{/repairs/book}" th:object="${repair}" 
+				method="get" class="w-50">
+			<!-- 	<label >repairShop</label> -->
+				<input type="hidden" class="form-control" name="repairShop" th:value="${!selectedShop.isEmpty()} ? ${selectedShop.get().id} : '0'" />
+				<label for="Vehicle">Select vehicle</label>
+				<select class="form-control" id="Vehicle" name="vehicle" th:field="*{vehicle}">
+					<option th:each="vehicle : ${customerVehicles}"
+						th:value="${vehicle.getId}" th:text="${vehicle.registrationPlate}"></option>
+				</select> 
+				<br>
+				<input type="submit" class="btn btn-secondary" value="Select vehicle" />
+			</form>
+			<br>
+
+			<!-- select repairshop -->
+			<form action="" th:action="@{/repairs/book}" th:object="${repair}"
+				method="get" class="w-50">
+		<!--		<label>selectedVehicle</label>  />-->
+				<input type="hidden" name="vehicle" class="form-control" 
+					th:value="${!selectedVehicle.isEmpty()} ? ${selectedVehicle.get().id} : '0'"
+				<label for="Shop">Select repair shops</label>
+				<select class="form-control" id="Shop" name="repairShop" th:field="*{repairShop}">
+					<option th:each="repairShop : ${repairShops}"
+						th:value="${repairShop.getId}" th:text="${repairShop.getName}"></option>
+				</select> 
+				<br>
+				<input type="submit" class="btn btn-secondary" value="Select shop" />
+			</form>
+			<br>
+
+			<!-- book appointment-->
+			<form action="" th:action="@{/repairs/book}" th:object="${repair}"
+				method="post" class="w-50">
+				<p>
+					Repair date: <input type="date" class="form-control" th:field="*{repairDate}" />
+				</p>
+				<p>
+					Repair time: <input type="time" class="form-control" th:field="*{repairTime}" />
+				</p>
+				<!-- <label >selectedVehicle</label> -->
+				<input required type="hidden" class="form-control" name="vehicle"
+					th:value="${!selectedVehicle.isEmpty()} ? ${selectedVehicle.get().id} : ''" />
+				<!-- <label type="hidden" >selectedShop</label> -->
+				<input required type="hidden" class="form-control" name="repairShop"
+					th:value="${!selectedShop.isEmpty()} ? ${selectedShop.get().id} : ''" />
+				<!-- <label >isProcessed</label> -->
+				<input required type="hidden" class="form-control" name="isProcessed" value=0 /> 
+				<label for="RType">Select repair type</label>
+				<select required class="form-control" id="RType"
+					name="repairType" th:field="*{repairType}">
+					<option th:each="repairType : ${repairTypesByRepairShop}"
+						th:value="${repairType.getId}" th:text="${repairType.getName}"></option>
+				</select>
+				<br>
+				<p>
+					<input type="submit" class="btn btn-secondary" value="Book now" /> 
+				</p>
+			</form>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

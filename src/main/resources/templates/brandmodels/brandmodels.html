@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+		<div class="text-right">
+			<a href="/brandmodels/add" class="btn btn-secondary">Add</a>
+      	</div>
+		
+			<h3>Brand models</h3>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Brand</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${brandModels.empty}">
+						<td colspan="2">No brand models available</td>
+					</tr>
+					<tr th:each="brandModel : ${brandModels}">
+						<td><span th:text="${brandModel.id}"> </span></td>
+						<td><span th:text="${brandModel.name}"> </span></td>
+						<td><span th:text="${brandModel.brand.getName}"> </span></td>
+						<td><a
+							th:href="@{/brandmodels/edit/{id}(id=${brandModel.id})}">Edit</a></td>
+						<td><a
+							th:href="@{/brandmodels/delete/{id}(id=${brandModel.id})}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Repairs</h1>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Price</th>
+						<th>Repair date</th>
+						<th>Repair time</th>
+						<th>Repair shop</th>
+						<th>Repair types</th>
+						<th>Repaired vehicle</th>
+						<th>Brand</th>
+						<th>Status</th>
+						<th>Customer</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${repairs.empty}">
+						<td colspan="2">No repairs available</td>
+					</tr>
+					<tr th:each="repair : ${repairs}">
+						<td><span th:text="${repair.id}"> </span></td>
+						<td><span th:text="${repair.price}"> </span></td>
+						<td><span th:text="${repair.repairDate}"> </span></td>
+						<td><span th:text="${repair.repairTime}"> </span></td>
+						<td><span th:text="${repair.repairShop.getName}"> </span></td>
+						<td><span th:text="${repair.repairType.getName}"> </span></td>
+						<td><span th:text="${repair.vehicle.registrationPlate}"></span></td>
+						<td><span th:text="${repair.vehicle.brandModel.brand.name}"></span></td>
+						<td><span th:text="${repair.isProcessed == true ? 'finished' : 'booked'}"></span></td>
+						<td><span
+							th:text="${repair.vehicle.customer.firstName} + ' ' + ${repair.vehicle.customer.lastName}">
+						</span></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>
+\

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Repairs to be processed</h1>
+		 	<h2>Repairshop: <span th:text="${currentRepairShop.name}"></span></h2>
+			<br />
+			
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Repair date</th>
+						<th>Repair time</th>
+						<th>Repair types</th>
+						<th>Process</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${repairs.empty}">
+						<td colspan="2">No repairs available</td>
+					</tr>
+					<tr th:each="repair : ${repairs}">
+						<td><span th:text="${repair.id}"> </span></td>
+						<td><span th:text="${repair.repairDate}"> </span></td>
+						<td><span th:text="${repair.repairTime}"> </span></td>
+						<td><span th:text="${repair.repairType.getName}"> </span></td>
+						<td><a th:href="@{/repairs/process/{id}(id=${repair.id})}">Process</a></td>
+					</tr>
+				</tbody>
+			</table>
+
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>
+\

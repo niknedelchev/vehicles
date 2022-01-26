@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h3>Brand models - edit</h3>
+			<br />
+
+			<form action="#" 
+				th:action="@{/brandmodels/edit/{id}(id=${brandModel.id})}"
+				th:object="${brandModel}" class="w-50" th:method="post">
+				<label for="name" >Name</label> <input type="text" class="form-control" th:field="*{name}"
+					id="name" placeholder="Name">
+				<label for="Select" >Select brand</label> 
+				<select name="brand" class="form-control" th:field="*{brand}">
+					<option value="" class="form-control">Select brand</option>
+					<option th:each="brand : ${brands}" th:value="${brand.getId}"
+						th:text="${brand.getName}" class="form-control"></option>
+				</select> <br> <input type="submit" class="btn btn-secondary"  value="Submit" />
+			</form>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

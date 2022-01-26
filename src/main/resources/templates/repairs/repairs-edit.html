@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Repairs - edit</h1>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Price</th>
+						<th>Service hour</th>
+						<th>Repair shop</th>
+					</tr>
+				</thead>
+			</table>
+
+			<form action="#" th:action="@{/repairs/edit/{id}(id=${repair.id})}"
+				th:object="${repair}" method="post">
+				<p>
+					Price: <input type="text" th:field="*{price}" />
+				</p>
+				<p>
+					Repair date: <input type="date" th:field="*{repairDate}" />
+				</p>
+				<p>
+					Repair time: <input type="time" th:field="*{repairTime}" />
+				</p>
+				<select name="repairShop" th:field="*{repairShop}">
+					<option value="">Select repair shops</option>
+					<option th:each="repairShop : ${repairShops}"
+						th:value="${repairShop.getId}" th:text="${repairShop.getName}"></option>
+				</select> <select name="repairType" th:field="*{repairType}">
+					<option value="">Select repair type</option>
+					<option th:each="repairType : ${repairTypes}"
+						th:value="${repairType.getId}" th:text="${repairType.getName}"></option>
+				</select>
+				<p>
+					<input type="submit" value="Submit" /> <input type="reset"
+						value="Reset" />
+				</p>
+			</form>
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

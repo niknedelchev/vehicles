@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h3>Repairs - ad</h3>
+			<br />
+
+			<form action="#" th:action="@{/repairs/add}" th:object="${repair}"
+				method="post" class="w-50">
+				<p>
+					Price: <input type="text" class="form-control" th:field="*{price}" />
+				</p>
+				<p>
+					Repair date: <input type="date" class="form-control"
+						th:field="*{repairDate}" />
+				</p>
+				<p>
+					Repair time: <input type="time" class="form-control"
+						th:field="*{repairTime}" />
+				</p>
+
+				<label for="repairShopsDropDown">Select qualification</label> 
+				<select
+					name="repairShop" id="repairShopsDropDown" class="form-control"
+					th:field="*{repairShop}">
+					<option value="">Select repair shops</option>
+					<option th:each="repairShop : ${repairShops}"
+						th:value="${repairShop.getId}" th:text="${repairShop.getName}"></option>
+				</select> 
+				<br> 
+				<label  for="qualificationDropDown">Select qualification</label> 
+					<select name="repairType" id="qualificationDropDown"
+					class="form-control" th:field="*{repairType}">
+					<option value="">Select repair type</option>
+					<option th:each="repairType : ${repairTypes}"
+						th:value="${repairType.getId}" th:text="${repairType.getName}"></option>
+				</select>
+				<p>
+					<input type="submit" class="btn btn-secondary" value="Submit" /> <input
+						type="reset" class="btn btn-secondary" value="Reset" />
+				</p>
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>
+\

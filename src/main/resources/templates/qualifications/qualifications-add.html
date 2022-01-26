@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Qualifications - add</h1>
+			<br />
+
+			<form action="#" class="w-50" th:action="@{/qualifications/add}"
+				th:object="${qualification}" method="post">
+				<p>
+					Name: <input type="text" class="form-control" th:field="*{name}" />
+				</p>
+				
+				<label for="repairTypesDropDown">Select qualification</label>
+				<select name="repairTypes" id="repairTypesDropDown" class="form-control" th:field="*{repairTypes}" multiple>
+					<option value="">Select qualification</option>
+					<option th:each="repairType : ${repairTypes}"
+						th:value="${repairType.getId}" th:text="${repairType.getName}"></option>
+				</select>
+				<p>
+					<input type="submit" class="btn btn-secondary" value="Submit" />
+				</p>
+			</form>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

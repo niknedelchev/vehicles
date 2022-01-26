@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Employees - edit</h1>
+			<br />
+			
+			<form action="#" class="w-50"
+				th:action="@{/employees/edit/{id}(id=${employee.id})}"
+				th:object="${employee}" method="post">
+				<p>
+					First name: <input type="text" class="form-control" th:field="*{firstName}" />
+				</p>
+				<p>
+					Last name: <input type="text" class="form-control" th:field="*{lastName}" />
+				</p>
+				<label for="qualificationDropDown">Select qualification</label>
+				<select name="qualification" id="qualificationDropDown" class="form-control" th:field="*{qualification}">
+					<option value="">Select qualification</option>
+					<option th:each="qualification : ${qualifications}"
+						th:value="${qualification.getId}"
+						th:text="${qualification.getName}"></option>
+				</select> 
+				<br>
+				
+				<label for="repairShopDropDown">Select repair shop</label>
+				<select name="repairShop" id="repairShopDropDown" class="form-control" th:field="*{repairShop}">
+					<option value="">Select repair shops</option>
+					<option th:each="repairShop : ${repairShops}"
+						th:value="${repairShop.getId}" th:text="${repairShop.getName}"></option>
+				</select>
+				<br>
+				
+				<p>
+					<input type="submit" class="btn btn-secondary" value="Submit" />
+				</p>
+			</form>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

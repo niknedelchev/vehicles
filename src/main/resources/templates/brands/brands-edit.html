@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h3>Brands - edit</h3>
+			<br />
+
+			<form action="#" th:action="@{/brands/edit/{id}(id=${brand.id})}"
+				th:object="${brand}" th:method="post" class="w-50">
+				<p>
+					Name: <input type="text" class="form-control" th:field="*{name}" />
+				</p>
+				<p>
+					<input type="submit" class="btn btn-secondary" value="Submit" />
+				</p>
+			</form>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

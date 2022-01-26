@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<title>Vehicle service app</title>
+
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/custom.css" />
+
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
+		th:fragment="navbar">
+		<a class="navbar-brand" th:href="@{/}">Vehicle service app</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+				
+				<li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link" th:href="@{/admin}">Admin</a></li>
+				<li class="nav-item" sec:authorize="hasRole('ROLE_EMPLOYEE')"><a class="nav-link" th:href="@{/employee}">Profile</a></li>
+				<li class="nav-item" sec:authorize="hasRole('ROLE_CUSTOMER')"><a class="nav-link" th:href="@{/customer}">Profile</a></li>
+				
+				<li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+					<a	class="nav-link dropdown-toggle" href="#" id="reportsDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Reports </a>
+						<div class="dropdown-menu" aria-labelledby="reportsDropdown">
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_EMPLOYEE')" th:href="@{/repairs/repairshop/vehicle-history}">Vehicle history</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_EMPLOYEE')" th:href="@{/repairs/repairshop}">All repairs at repair shop</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_EMPLOYEE')" th:href="@{/repairs/repairshop/repairs-by-type}">Repairs (count) by type</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_EMPLOYEE')" th:href="@{/repairs/repairshop/repairs-by-brand}">Repairs (count) by brand</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_EMPLOYEE')" th:href="@{/repairs/repairshop/repairs-by-year}">Repairs (count) by year	</a>
+							
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_CUSTOMER')" th:href="@{/repairs/customer/vehicle-history}">Vehicle repair history</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_CUSTOMER')" th:href="@{/repairs/customer/}">All repairs for customer</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_CUSTOMER')" th:href="@{/vehicles/customer/list}">Vehicles list</a>
+							
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/customers}">Customers</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/vehicles}">Vehicles</a>
+						
+						</div>
+				</li>
+				
+				
+				<li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+					<a	class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Operations </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_EMPLOYEE')" th:href="@{/repairs/process/}">Process bookings</a>
+							
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_CUSTOMER')" th:href="@{/repairs/book}">Book repair</a>
+						 	<a class="dropdown-item" sec:authorize="hasRole('ROLE_CUSTOMER')" th:href="@{/vehicles/customer}">Vehicles</a>
+							
+							<div sec:authorize="hasRole('ROLE_ADMIN')">Main</div>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/register/admin}">Register admin</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/register/employee}">Register employee</a>
+							<div sec:authorize="hasRole('ROLE_ADMIN')">Other</div>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/repairshops}">Repair shops</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/repairtypes}">Repair types</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/qualifications}">Qualifications</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/employees}">Employees</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/brands}">Brands</a>
+							<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/brandmodels}">Brand models</a>
+							
+						</div>
+				</li>
+			</ul>
+		
+			<form class="form-inline my-2 my-lg-0" form-method="post"
+				th:action="@{/logout}">
+				<button sec:authorize="isAuthenticated()"
+					class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+	<a sec:authorize="isAnonymous()" th:href="@{/register}"
+					class="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit">Register</a>
+				<a sec:authorize="isAnonymous()" th:href="@{/login}"
+					class="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit">Login</a>
+			</form>
+
+
+		</div>
+	</nav>
+
+	<th:block th:fragment="footer">
+		<footer class="container" th:fragment="footer">
+			<p>Vehicle service app. Student F97072</p>
+		</footer>
+		<script src="/js/jquery-3.6.0.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+	</th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h3>Customers - add new customer</h3>
+			<br />
+
+
+			<form action="#" th:action="@{/customers/add}"
+				th:object="${customer}" method="POST" class="w-50">
+
+				<p>
+					First name: <input type="text" class="form-control" th:field="*{firstName}" />
+				</p>
+				<p>
+					Last name: <input type="text" class="form-control" th:field="*{lastName}" />
+				</p>
+				<p>
+					<input type="submit" class="btn btn-secondary" value="Submit" />
+				</p>
+			</form>
+
+
+			</table>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

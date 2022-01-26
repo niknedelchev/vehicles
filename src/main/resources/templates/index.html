@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			
+			<h1 style="text-align: center;">Vehicle service app</h1>
+			<img src="./mainframeimage.jpeg" class="img-fluid" alt="Responsive image">
+			<div/>
+			<br>
+			<h3 sec:authorize="isAnonymous()" style="text-align: center;"> Please log in to be able to use the app.</h3>
+			<h3 sec:authorize="isAuthenticated()" style="text-align: center;"> You are loged in. You can now navigate throughout the app via the navbar links.</h3>
+		</div>
+	</main>
+	<hr>
+
+
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

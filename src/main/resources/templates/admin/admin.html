@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Admin page</h1>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Username</th>
+						<th>Role</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span th:text="${userName}"> </span></td>
+						<td><span th:text="${role}"> </span></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br />
+			
+		<div class="row">
+			<div class="col">
+				<h3>Reports</h3>
+				<div>
+					<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')"
+						th:href="@{/customers}">Customers</a> <a class="dropdown-item"
+						sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/vehicles}">Vehicles</a>
+				</div>
+			</div>
+		
+			<div class="col">
+				<h3>Operations</h3>
+				<div>
+					<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')"
+						th:href="@{/register/admin}">Register admin</a> 
+					<a
+						class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')"
+						th:href="@{/register/employee}">Register employee</a>
+					 <a
+						class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')"
+						th:href="@{/repairshops}">Repair shops</a> 
+					<a class="dropdown-item"
+						sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/repairtypes}">Repair
+						types</a> 
+						<a class="dropdown-item"
+						sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/qualifications}">Qualifications</a>
+					<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')"
+						th:href="@{/employees}">Employees</a> 
+					<a class="dropdown-item"
+						sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/brands}">Brands</a>
+					<a class="dropdown-item" sec:authorize="hasRole('ROLE_ADMIN')"
+						th:href="@{/brandmodels}">Brand models</a>
+				</div>
+			</div>
+		</div>
+	</main>
+	<hr>
+
+
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

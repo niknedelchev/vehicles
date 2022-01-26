@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Employees</h1>
+			<br />
+
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>First name</th>
+						<th>Last name</th>
+						<th>Qualification</th>
+						<th>Repair shop</th>
+						<th>Edit</th>
+						<th>Delete</th>
+						<th>Select</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${employees.empty}">
+						<td colspan="2">No employees available</td>
+					</tr>
+					<tr th:each="employee : ${employees}">
+						<td><span th:text="${employee.id}"> </span></td>
+						<td><span th:text="${employee.firstName}"> </span></td>
+						<td><span th:text="${employee.lastName}"> </span></td>
+						<td><span th:text="${employee.qualification.getName}">
+						</span></td>
+						<td><span th:text="${employee.repairShop.getName}"> </span></td>
+						<td><a th:href="@{/employees/edit/{id}(id=${employee.id})}">Edit</a></td>
+						<td><a th:href="@{/employees/delete/{id}(id=${employee.id})}">Delete</a></td>
+						<td><a th:href="@{/employee/{id}(id=${employee.id})}">-></a></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>

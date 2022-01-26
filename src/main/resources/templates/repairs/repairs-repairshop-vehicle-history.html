@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<div th:replace="fragments :: navbar" />
+
+<body>
+	<main>
+		<div class="container general-list-view">
+			<h1>Repairs history</h1>
+			<form action="" class="w-50" th:action="@{/repairs/repairshop/vehicle-history}" method="GET">
+				<label for"Vehicle">Select vehicle</label>
+				<select id="Vehicle" class="form-control" name="vehicleId">
+					<option th:each="vehicle : ${vehicles}"
+						th:value="${vehicle.getId}" th:text="${vehicle.registrationPlate}"></option>
+				</select> 
+				<br>
+				<input type="submit" class="btn btn-secondary" value="Submit" />
+			</form>
+			
+			<h2 th:if="${vehicle != null}">Repairs at shop: 
+				<span th:text="${currentRepairShop.name}"></span> 
+				for vehicle : <span th:text="${vehicle.registrationPlate}"/> , 
+			 	<span th:text="${vehicle.brandModel.brand.name}"/>
+			 </h2>
+			<br />
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>Id</th>
+						<th>Price</th>
+						<th>Repair date</th>
+						<th>Repair time</th>
+						<th>Repair types</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${repairs == null}">
+						<td colspan="2">No repairs available</td>
+					</tr>
+					<tr th:each="repair : ${repairs}">
+						<td><span th:text="${repair.id}"> </span></td>
+						<td><span th:text="${repair.price}"> </span></td>
+						<td><span th:text="${repair.repairDate}"> </span></td>
+						<td><span th:text="${repair.repairTime}"> </span></td>
+						<td><span th:text="${repair.repairType.getName}"> </span></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</main>
+	<hr>
+	<th:block th:replace="fragments :: footer" />
+</body>
+</html>
+\
